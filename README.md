@@ -371,13 +371,14 @@ Endpoint :  GET /account/{accountId}/voicemail-library/{libraryItemId}
 
 Method : GET 
 
-   	Path parameters : accountId (required)
+Path parameters : accountId (required)
 
-   	Name | Type | Required | Description  
-   ------|-------|---------|-------------
-   languageId|string|no	|Language internal identifier for filtering.
-   page |integer|no|Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'.
-   perPage|integer|no|Indicates the page size (number of items). Possible values: Max or a numeric value. If not specified, all records are returned on one page.
+
+Name | Type | Required | Description  
+------|-------|---------|-------------
+languageId|string|no|Language internal identifier for filtering.
+page |integer|no|Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'.
+perPage|integer|no|Indicates the page size (number of items). Possible values: Max or a numeric value. If not specified, all records are returned on one page.
 
 
 * Request Example
@@ -470,7 +471,7 @@ Open questions
 
 
 
-### Send VM to Bulk Extensions
+## Send VM to Bulk Extensions
 
 
  Here we shall discuss the key feature that deals with sending VM to multiple extensions at one go.
