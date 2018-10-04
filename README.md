@@ -303,9 +303,10 @@ HTTP Status Code | Error Code| Message | Reason
 
    	Name|Type|Required|Description
    	----|----|--------|-----------
-   languageId|string|no|Language internal identifier for filtering
-   page |integer|no|Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'.
-   perPage|integer|no|Indicates the page size (number of items). Possible values: Max or a numeric value. If not specified, all records are returned on one page.
+   	languageId|string|no|Language internal identifier for filtering.
+   	page|integer|no|Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'.
+   	perPage|integer|no|Indicates the page size (number of items). Possible values: Max or a numeric value. If not specified, all records are returned on one page.
+
 
    * Request Examples
 
