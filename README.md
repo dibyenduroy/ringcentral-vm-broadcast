@@ -27,56 +27,47 @@ Currently we have an API to enable the VM Broadcast feature. There are also plan
 
 API Endpoint : /restapi/v1.0/internal/service-parameter/931?accountId={{accountId}}
 
+Method : PUT
+
 This is an internal API and you need to get in touch with RingCentral Dev Support to enable the feature for your account through the API
 
-Open Questions
-
+*Open Questions
 1. What account level permission is needed to Enable the API
 
 2. How to Disable the API
 
 3. What Countries do the feature currently work (US and Canada Only)?
 
-4. What Office versions will the feature work : Ultimate and Enterprise?
+4. What Office versions will the feature work : Ultimate and Enterprise?*
 
 
 Sample Request to Enable the feature for an account
 
+```
 PUT {{pas}}/restapi/v1.0/internal/service-parameter/931?accountId={{accountId}}
-
-Body
 
 {
 
 	"value" : "2"
 } 
 
-
+```
 
 * User Permission Model : 
 
    In order to use the API, the User needs to have the following permissions
 
+   *User Permission
       *  "Users"
       *  "VoicemailBroadcasting"
+The "VoicemailBroadcasting" is a new permission model built for using this feature. This can be accessed through Service Web.By default a RingCentral Super Admin will have this permission included. It is also suggeted that developers interested in building an App with this feature can have a custom user-role created and assign it to the users who might be interested in using this App.
 
-   The "VoicemailBroadcasting" is a new permission model built for using this feature. This can be accessed through Service Web.
-
-   By default a RingCentral Super Admin will have this permission included. It is also suggeted that developers interested in building an App with this feature can have a custom user-role created and assign it to the users who might be interested in using this App.
-
-   Open Questions
-
+   *Open Questions
    1. Will the "VoicemailBroadcasting" be by default enabled for the Super Admin
+   2. Can the Super Admin assign this permission to any user*
 
-   2. Can the Super Admin assign this permission to any user
-
-   * App Permission Model : 
-
-      App Permission : Voicemail
-
-   Open Questions
-
-    1. What is the name of the App Permission 
+   
+   *  App Permission : Voicemail
 
 
   Once the user and App permissions are setup appropriately , you should be all set to start using the API. Let is now get started with the API details
@@ -85,7 +76,9 @@ Body
   # VM Broadcasting API Features
 
   
-  ## Upload a VM to RingCentral VM Library : Before you send any Voice Mail, you would ideally like to upload some Voicemail as per your preference to the VM Library. We have an API to do just that.
+  ## Upload a VM to RingCentral VM Library : 
+
+  Before you send any Voice Mail, you would ideally like to upload some Voicemail as per your preference to the VM Library. We have an API to do just that.
 
   API Endpoint : {{pas}}/restapi/v1.0/account/{{accountId}}/voicemail-library
 
@@ -93,13 +86,13 @@ Body
 
   Path Parameter : accountId (required)
 
-  Request Body Parameters(multipart/form-data, text/plain (request doesn't contain any parts with Content-Type: application/json)) : 
+  Request Body Parameters (multipart/form-data, text/plain (request doesn't contain any parts with Content-Type: application/json)) : 
 
   * languageId : (Id of the Voicemail Language).  Can be taken for /restapi/v1.0/dictionary/language. Not a mandatory parameter.
 
   Parts with any names besides languageId and attachment should be ignored. If part languageId is duplicated, return error HTTP 400 CMN-406 "Duplicate value for parameter ${parameterName}: ${parameterValue} found in request."
   
-Request Body Parameters (multipart/mixed or multipart/form-data, application/json):
+	Request Body Parameters (multipart/mixed or multipart/form-data, application/json):
 
 * languageId : (Id of the Voicemail Language).  Can be taken for /restapi/v1.0/dictionary/language. Not a mandatory parameter.
 
@@ -115,9 +108,8 @@ Request Body Parameters (multipart/mixed or multipart/form-data, application/jso
 	* max number of voicemails in the library: 100 (not deleted)
 	* supported formats: audio/mpeg, audio/mp3, audio/wav, audio/x-wav
 
-  Open Questions
-
-  1. Is 100 the Max VM Library Limit for a Account?
+  *Open Questions
+	1. Is 100 the Max VM Library Limit for a Account?*
 
 
 
@@ -276,7 +268,7 @@ Request Body Parameters (multipart/mixed or multipart/form-data, application/jso
   ]
 }
 ```
-
+Error Codes
 
 HTTP Status Code | Error Code| Message | Reason
 -----------|------------|------------|-------------
@@ -310,7 +302,7 @@ HTTP Status Code | Error Code| Message | Reason
    	Path parameters : accountId (required)
 
    	Name | Type | Required | Description  
-   ------|-------|---------|-------------
+   --------|-------|---------|-------------
    languageId|string|no	|Language internal identifier for filtering.
    page |integer|no|Indicates the page number to retrieve. Only positive number values are allowed. Default value is '1'.
    perPage|integer|no|Indicates the page size (number of items). Possible values: Max or a numeric value. If not specified, all records are returned on one page.
@@ -580,9 +572,104 @@ Endpoint : {{pas}}/restapi/v1.0/account/{{accountId}}/voicemail-library/broadcas
 
 Method : GET
 
+```
+  
+  Request
+
+	GET /restapi/v1.0/account/~/voicemail-library/broadcasts/402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d 
+
+```
+
+Response
+
+Name | Type | Required | Description
+-----|------|----------|-------------
+id|string|Yes|Task unique identifier
+uri|string|No|Standard resource URI
+status|Accepted,InProgress,Completed,Failed,Cancelled|No|Task actual state
+creationTime|string(datetime)|No|Task creation (request) time
+lastModifiedTime|string(datetime)|No|Last task status change time
+details|struct|Yes|Detailed task parameters (contains only parameters specified in request
+details.libraryItemId|string|No|Voicemail library item unique identifier
+details.from|struct|No|Sender information
+details.from.phoneNumber|string|No|Phone number
+details.from.name|string|No|Symbolic name associated with a party
+details.notifySipClients|boolean|No|Flag indicating that SIP notifications have to be send
+details.priority|Normal, High|No|Message priority
+result|struct|No|Result of task completion. Returned only for tasks in Completed state
+result.errors|array|No|List of errors occurred. Returned only for tasks in Failed state
+result.errors[i].errorCode|string|No|Unique logical error code
+result.errors[i].message|string|No|Human-readable error message
+result.processedExtensions|Array of string|No|List of successfully processed extensions (internal identifiers)
+result.failedExtensions|Array of string|No|List of failed extension (internal identifiers)
 
 
 
+```
+	
+	Response, Completed task
+
+	{  
+   "id":"402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d",
+   "uri":"https://platform.ringcentral.com/restapi/v1.0/account/5646451222/voicemail-library/broadcasts/402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d",
+   "status":"Completed",
+   "creationTime":"2018-07-16T13:30:09Z",
+   "lastModifiedTime":"2018-07-16T17:19:15Z",
+   "details":{  
+      "libraryItemId":"5468411",
+      "from":{  
+         "phoneNumber":"+18559100010",
+         "name":"Help desk"
+      },
+      "notifySipClients":true,
+      "priority":"high"
+   },
+   "result":{  
+      "processedExtensions":[  
+         "1813741010",
+         "1289331011"
+      ],
+      "failedExtensions":[  
+         "2563741010",
+         "65454288850"
+      ]
+   }
+}
+
+
+```
+
+```
+	
+	Response, Task Failed
+
+
+	{  
+   "id":"402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d",
+   "uri":"https://platform.ringcentral.com/restapi/v1.0/account/5646451222/voicemail-library/broadcasts/402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d",
+   "status":"Failed",
+   "creationTime":"2018-07-16T13:30:09Z",
+   "lastModifiedTime":"2018-07-16T17:19:15Z",
+   "details":{  
+      "libraryItemId":"5468411",
+      "from":{  
+         "phoneNumber":"+18559100010",
+         "name":"Help desk"
+      },
+      "notifySipClients":true,
+      "priority":"high"
+   },
+   "result":{  
+      "errors":[  
+         {  
+            "errorCode":"CMN-203",
+            "message":"Internal server error"
+         }
+      ]
+   }
+}
+	
+```
 
 
 
