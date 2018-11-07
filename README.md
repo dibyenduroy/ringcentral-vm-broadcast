@@ -176,7 +176,7 @@ The "VoicemailBroadcasting" is a new permission model built for using this featu
   "uri": "https://<RingCentralEnviornment>/restapi/v1.0/account/400770494008/voicemail-library/22008",
   "id": "22008",
   "contentType": "audio/mpeg",
-  "contentUri": "https://media-plarnd.lab.nordigy.ru/restapi/v1.0/account/400770494008/voicemail-library/22008/content",
+  "contentUri": "https://<RingCentralEnviornment>/restapi/v1.0/account/400770494008/voicemail-library/22008/content",
   "filename": "my_custom_voicemail.mp3",
   "duration": 60,
   "language": {
