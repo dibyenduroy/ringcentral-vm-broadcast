@@ -23,35 +23,11 @@ In order to use the the VM Broadcast API feature there are certain User and Appl
 Pre Setup and Permission Model
 
 * Enabling the Feature for your RingCentral Account : Currenty in order to enable the feature for a RingCentral account , you need to enable the feature at an Account level.
-Currently we have an API to enable the VM Broadcast feature. There are also plans in future to provide it through Admin Web
-
-API Endpoint : /restapi/v1.0/internal/service-parameter/931?accountId={{accountId}}
-
-Method : PUT
+Currently we have an Internal API to enable the VM Broadcast feature. There are also plans in future to provide it through Admin Web
 
 This is an internal API and you need to get in touch with RingCentral Dev Support to enable the feature for your account through the API
 
-*Open Questions
-1. What account level permission is needed to Enable the API
-
-2. How to Disable the API
-
-3. What Countries do the feature currently work (US and Canada Only)?
-
-4. What Office versions will the feature work : Ultimate and Enterprise?*
-
-
-Sample Request to Enable the feature for an account
-
-```
-PUT {{pas}}/restapi/v1.0/internal/service-parameter/931?accountId={{accountId}}
-
-{
-
-	"value" : "2"
-} 
-
-```
+This feature is available for  RC US/CAN (Ultimate and Enterprise) Accounts.
 
 * User Permission Model : 
 
@@ -62,9 +38,9 @@ PUT {{pas}}/restapi/v1.0/internal/service-parameter/931?accountId={{accountId}}
       *  "VoicemailBroadcasting"
 The "VoicemailBroadcasting" is a new permission model built for using this feature. This can be accessed through Service Web.By default a RingCentral Super Admin will have this permission included. It is also suggeted that developers interested in building an App with this feature can have a custom user-role created and assign it to the users who might be interested in using this App.
 
-   *Open Questions
-   1. Will the "VoicemailBroadcasting" be by default enabled for the Super Admin
-   2. Can the Super Admin assign this permission to any user*
+   
+   "VoicemailBroadcasting" will be by default enabled for the Super Admin
+   SuperAdmin can assign this permission to any user.
 
    
    *  App Permission : Voicemail
@@ -105,11 +81,10 @@ The "VoicemailBroadcasting" is a new permission model built for using this featu
     * max file size: 20Mb
 	* min duration: 3 sec
 	* max duration: 3 min 
-	* max number of voicemails in the library: 100 (not deleted)
+	* max number of voicemails in the library: 100 (not deleted) (This number can be changed if needed)
 	* supported formats: audio/mpeg, audio/mp3, audio/wav, audio/x-wav
 
-  *Open Questions
-	1. Is 100 the Max VM Library Limit for a Account?*
+  
 
 
 
@@ -198,14 +173,14 @@ The "VoicemailBroadcasting" is a new permission model built for using this featu
 ```
 
 {
-  "uri": "https://api-plarnd.lab.nordigy.ru/restapi/v1.0/account/400770494008/voicemail-library/22008",
+  "uri": "https://<RingCentralEnviornment>/restapi/v1.0/account/400770494008/voicemail-library/22008",
   "id": "22008",
   "contentType": "audio/mpeg",
   "contentUri": "https://media-plarnd.lab.nordigy.ru/restapi/v1.0/account/400770494008/voicemail-library/22008/content",
   "filename": "my_custom_voicemail.mp3",
   "duration": 60,
   "language": {
-    "uri": "https://api-plarnd.lab.nordigy.ru/restapi/v1.0/dictionary/language/3084",
+    "uri": "https://<RingCentralEnviornment>/restapi/v1.0/dictionary/language/3084",
     "id": "3084",
     "name": "French (Canadian)",
     "localeCode": "fr-CA"
@@ -324,17 +299,17 @@ HTTP Status Code | Error Code| Message | Reason
 
    	200 OK
 {
-  "uri": "https://api-plarnd.lab.nordigy.ru/restapi/v1.0/account/400770656008/voicemail-library?page=1&perPage=100",
+  "uri": "https://<RingCentralEnviornment>/restapi/v1.0/account/400770656008/voicemail-library?page=1&perPage=100",
   "records": [
     {
-      "uri": "https://api-plarnd.lab.nordigy.ru/restapi/v1.0/account/400770494008/voicemail-library/22008",
+      "uri": "https://<RingCentralEnviornment>/restapi/v1.0/account/400770494008/voicemail-library/22008",
       "id": "22008",
       "contentType": "audio/mpeg",
-      "contentUri": "https://media-plarnd.lab.nordigy.ru/restapi/v1.0/account/400770494008/voicemail-library/22008/content",
+      "contentUri": "https://<RingCentralEnviornment>/restapi/v1.0/account/400770494008/voicemail-library/22008/content",
       "filename": "my_custom_voicemail.mp3",
       "duration": 60,
       "language": {
-        "uri": "https://api-plarnd.lab.nordigy.ru/restapi/v1.0/dictionary/language/3084",
+        "uri": "https://<RingCentralEnviornment>/restapi/v1.0/dictionary/language/3084",
         "id": "3084",
         "name": "French (Canadian)",
         "localeCode": "fr-CA"
@@ -349,10 +324,10 @@ HTTP Status Code | Error Code| Message | Reason
   },
   "navigation": {
     "firstPage": {
-      "uri": "https://api-plarnd.lab.nordigy.ru/restapi/v1.0/account/400770656008/voicemail-library/?page=1&perPage=100"
+      "uri": "https://<RingCentralEnviornment>/restapi/v1.0/account/400770656008/voicemail-library/?page=1&perPage=100"
     },
     "lastPage": {
-      "uri": "https://api-plarnd.lab.nordigy.ru/restapi/v1.0/account/400770656008/voicemail-library/?page=1&perPage=100"
+      "uri": "https://<RingCentralEnviornment>/restapi/v1.0/account/400770656008/voicemail-library/?page=1&perPage=100"
     }
   }
 }
@@ -395,14 +370,14 @@ GET /restapi/v1.0/account/~/voicemail-library/22008
 ```
 	200 OK
 {  
-   "uri":"https://api-plarnd.lab.nordigy.ru/restapi/v1.0/account/400770494008/voicemail-library/22008",
+   "uri":"https://<RingCentralEnviornment>/restapi/v1.0/account/400770494008/voicemail-library/22008",
    "id":"22008",
    "contentType":"audio/mpeg",
-   "contentUri":"https://media-plarnd.lab.nordigy.ru/restapi/v1.0/account/400770494008/voicemail-library/22008/content",
+   "contentUri":"https://<RingCentralEnviornment>/restapi/v1.0/account/400770494008/voicemail-library/22008/content",
    "filename":"my_custom_voicemail.mp3",
    "duration":60,
    "language":{  
-      "uri":"https://api-plarnd.lab.nordigy.ru/restapi/v1.0/dictionary/language/3084",
+      "uri":"https://<RingCentralEnviornment>/restapi/v1.0/dictionary/language/3084",
       "id":"3084",
       "name":"French (Canadian)",
       "localeCode":"fr-CA"
@@ -541,7 +516,7 @@ Response parameters (successful operation):
 
 { 
   "task" : { 
-   "uri" : "https://platform.ringcentral.com/restapi/v1.0/account/5646451222/voicemail-library/broadcasts/402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d", 
+   "uri" : "https://<RingCentralEnviornment>/restapi/v1.0/account/5646451222/voicemail-library/broadcasts/402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d", 
    "id" : "402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d", 
     "status" : "Accepted", 
     "creationTime" : "2018-04-20T13:30:09Z", 
@@ -613,7 +588,7 @@ result.failedExtensions|Array of string|No|List of failed extension (internal id
 
 	{  
    "id":"402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d",
-   "uri":"https://platform.ringcentral.com/restapi/v1.0/account/5646451222/voicemail-library/broadcasts/402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d",
+   "uri":"https://<RingCentralEnviornment>/restapi/v1.0/account/5646451222/voicemail-library/broadcasts/402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d",
    "status":"Completed",
    "creationTime":"2018-07-16T13:30:09Z",
    "lastModifiedTime":"2018-07-16T17:19:15Z",
@@ -648,7 +623,7 @@ result.failedExtensions|Array of string|No|List of failed extension (internal id
 
 	{  
    "id":"402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d",
-   "uri":"https://platform.ringcentral.com/restapi/v1.0/account/5646451222/voicemail-library/broadcasts/402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d",
+   "uri":"https://<RingCentralEnviornment>/restapi/v1.0/account/5646451222/voicemail-library/broadcasts/402297343008-402297343008-f674e48cbb5a479bac124ca8afcffb3d",
    "status":"Failed",
    "creationTime":"2018-07-16T13:30:09Z",
    "lastModifiedTime":"2018-07-16T17:19:15Z",
