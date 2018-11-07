@@ -56,9 +56,9 @@ The "VoicemailBroadcasting" is a new permission model built for using this featu
 
 Before you send any Voice Mail, you would ideally like to upload some Voicemail as per your preference to the VM Library. We have an API to do just that.
 
-  API Endpoint : {{pas}}/restapi/v1.0/account/{{accountId}}/voicemail-library
+  API Endpoint : `{{pas}}/restapi/v1.0/account/{{accountId}}/voicemail-library`
 
-  Method : POST
+  Method : `POST`
 
   Path Parameter : accountId (required)
 
