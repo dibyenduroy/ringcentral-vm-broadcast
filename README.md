@@ -46,7 +46,7 @@ The "VoicemailBroadcasting" is a new permission model built for using this featu
    *  App Permission : Voicemail
 
 
-  Once the user and App permissions are setup appropriately , you should be all set to start using the API. Let is now get started with the API details
+  Once the user and App permissions are setup appropriately , you should be all set to start using the API. Let us now get started with the API details
 
 
   # VM Broadcasting API Features
@@ -54,7 +54,7 @@ The "VoicemailBroadcasting" is a new permission model built for using this featu
   
   ## Upload a VM to RingCentral VM Library : 
 
-  Before you send any Voice Mail, you would ideally like to upload some Voicemail as per your preference to the VM Library. We have an API to do just that.
+Before you send any Voice Mail, you would ideally like to upload some Voicemail as per your preference to the VM Library. We have an API to do just that.
 
   API Endpoint : {{pas}}/restapi/v1.0/account/{{accountId}}/voicemail-library
 
@@ -264,7 +264,7 @@ HTTP Status Code | Error Code| Message | Reason
 
 ## Get VMs from your RingCentral VoiceMail Library
 
-   Given that you have already uploaded a bunch of VMs into your RingCentral library and now you want your user to pick and choose from that VM library, you will use the following API to get a list of all the VMs for your user to pick and choose before selecting and sending one.
+Given that you have already uploaded a bunch of VMs into your RingCentral library and now you want your user to pick and choose from that VM library, you will use the following API to get a list of all the VMs for your user to pick and choose before selecting and sending one.
 
 
   * API name: Get Voicemail Library Items. 
